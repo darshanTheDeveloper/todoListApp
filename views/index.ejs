@@ -1,0 +1,86 @@
+<%- include('partials/header.ejs') %>
+  <div class="side-bar">
+    <i class="menu fa-solid fa-angle-right fa-xl" style="color: #ffffff;"></i>
+    <nav class="nav">
+      <ul>
+        <li><a href="/">HOME</a></li>
+        <li><a href="/favorite">IMPORTANT</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <% if (locals.updatedText) { %>
+    <div>
+      <form action="/" method="get">
+        <textarea name="text" cols="30" rows="10"></textarea>
+        <button type="submit">add</button>
+      </form>
+    </div>
+    <% } %>
+
+      <div class="container">
+        <% if (locals.list) { %>
+          <% for( let index=0; index < list.length; index++ ) { %>
+            <div class="todo-wrapper">
+
+              <form action="/completed" method="post" class="todoForm">
+                <input type="checkbox" class="checkbox" name="completed" value="<%= list[index]['_id'] %>" <% if
+                  (list[index]['completed']) { %> checked <% } %>>
+              </form>
+
+              <p class="todo" <% if (list[index]['completed']) { %> style="text-decoration:line-through;
+                text-decoration-color: rgb(132, 0, 255);text-decoration-thickness: 0.2em;" <% } %>>
+                  <%= list[index]['todo'] %>
+              </p>
+
+              <div class="btn-container">
+
+                <form action="/update" method="post">
+                  <button type="submit" name="updated" value="<%= list[index]['_id'] %>"
+                    style="border:none;outline:none;background-color: transparent;">
+                    <i class="edit fa-solid fa-pen-to-square" style="color:rgb(0, 0, 0);"></i>
+                  </button>
+                </form>
+
+                <form action="/delete" method="post">
+                  <button type="submit" name="deleted" value="<%= list[index]['_id'] %>"
+                    style="border:none;outline:none;background-color: transparent;">
+                    <i class="delete fa-regular fa-trash-can " style="color:rgb(0, 0, 0); font-weight:100 ;"></i>
+                  </button>
+                </form>
+
+                <form action="/favorite" method="post">
+                  <button type="submit" name="favorite" value="<%= list[index]['_id'] %>"
+                    style="border:none;outline:none;background-color: transparent;">
+                    <i class="favorite fa-regular fa-star" style="color:rgb(0, 0, 0); font-weight:100 ;"></i>
+                  </button>
+                </form>
+
+              </div>
+
+            </div>
+            <% } %>
+              <% }%>
+      </div>
+
+
+      <div class="input">
+        <form action="/" method="post">
+          <input required type="text" name="input" placeholder="Enter the Todo">
+
+          <button type="submit" class="add-btn">
+            add
+          </button>
+        </form>
+      </div>
+
+      <div class="wrapper">
+        <form action="/" method="post">
+          <textarea required name="input"></textarea>
+          <button class="btn btn-success" type="submit">DONE</button>
+        </form>
+        <div class="btn-main btn btn-success" onclick="showForm()">
+          + ADD
+        </div>
+      </div>
+<%- include('partials/footer.ejs') %>

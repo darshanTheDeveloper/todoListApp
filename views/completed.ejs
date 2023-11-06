@@ -1,0 +1,11 @@
+<%- include('partials/header.ejs') %>
+<div class="completed-todos-container">
+    <% for( let index = 0; index < list.length; index++ ) { %>
+          <div class="completed-todo">
+               <p>
+                  <%= list[index].todo %>
+               </p>
+          </div>
+    <% } %>
+</div>
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,8 @@
+<%-include('partials/header.ejs')%>
+    <form action="/update-save" method="post" id="prompt-holder" >
+        <textarea required spellcheck="false" name="text">
+            <%= todo %>
+        </textarea>
+        <button class="btn btn-success" type="submit" name="id" value="<%= id %>">save changes</button>
+    </form>
+<%- include('partials/footer.ejs') %>
