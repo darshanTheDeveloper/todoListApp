@@ -58,5 +58,5 @@ app.post('/completed',async(req,res)=>{
 })
 
 
-app.listen(3000,()=>console.log('server has started'))
+app.listen(process.env.PORT || port,()=>console.log('server has started'))
 
